@@ -1,0 +1,507 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix chear: <http://hadatac.org/ont/chear#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sio: <http://semanticscience.org/resource/> .
+@prefix eso: <http://purl.org/ontology/edu/eso/> .
+@prefix eao: <http://purl.org/ontology/edu/eao/> .
+@prefix : <http://purl.org/ontology/edu/eao/> .
+
+<http://purl.org/ontology/edu/eao/eao.ttl> rdf:type owl:Ontology ;
+    dct:creator "Sabbir M. Rashid"^^xsd:string ;
+    dct:contributor "Deborah L. McGuiness"^^xsd:string ;
+    dct:created "2017-05-15T12:00:00"^^xsd:dateTime ;
+    dct:modified "2019-02-14T12:00:00"^^xsd:dateTime ;
+    dct:description "Education Application Ontology"^^xsd:string ;
+    dct:title "Education Application Ontology"^^xsd:string ;
+    dct:license <http://www.apache.org/licenses/LICENSE-2.0> ;
+    owl:versionIRI <http://purl.org/ontology/edu/eao/0.9> .
+
+:hasStandard a owl:ObjectProperty ;
+	rdfs:domain :Course ;
+	rdfs:label "has standard" .
+
+sio:Entity rdf:type owl:Class ;
+    rdfs:label "Entity"^^xsd:string ;
+    dct:description "Every thing is an entity."^^xsd:string .
+
+sio:Attribute rdf:type owl:Class ;
+    rdfs:subClassOf sio:Entity ;
+    rdfs:label "Attribute"^^xsd:string ;
+    dct:description "An attribute is a characteristic of some entity."^^xsd:string .
+
+sio:Quality rdf:type owl:Class ;
+    rdfs:subClassOf sio:Attribute ;
+    rdfs:label "Quality"^^xsd:string ;
+    dct:description "A quality is an attribute that is intrinsically associated with its bearer (or its parts), but whose presence/absence and observed/measured value may vary."^^xsd:string .
+
+sio:Object rdf:type owl:Class ;
+    rdfs:subClassOf sio:Entity ;
+    rdfs:label "Object"^^xsd:string ;
+    dct:description "An object is an entity that is wholly identifiable at any instant of time during which it exists."^^xsd:string .
+
+sio:ObjectQuality rdf:type owl:Class ;
+    rdfs:subClassOf sio:Quality ;
+    rdfs:label "Object Quality"^^xsd:string ;
+    dct:description "An object quality is quality of an object."^^xsd:string .
+
+chear:Demographic rdf:type owl:Class ;
+    rdfs:subClassOf sio:Attribute ;
+    rdfs:label "Demographic"^^xsd:string ;
+    skos:definition "Demographics are quantifiable characteristics of a given population."^^xsd:string .
+
+chear:SocioeconomicStatus rdf:type owl:Class ;
+    rdfs:subClassOf sio:Attribute ;
+    rdfs:label "Socioeconomic Status"^^xsd:string ;
+    skos:definition "Socioeconomic Status Indicator Class"^^xsd:string .
+
+chear:EducationGrade rdf:type owl:Class ;
+    rdfs:label "Education Grade"^^xsd:string ;
+    rdfs:subClassOf chear:Demographic,
+        chear:SocioeconomicStatus,
+        sio:ObjectQuality ;
+    skos:definition "The highest grade of education achieved"^^xsd:string .
+
+chear:EducationLevel rdf:type owl:Class ;
+    rdfs:label "Level of Education"^^xsd:string ;
+    rdfs:subClassOf chear:Demographic,
+        chear:SocioeconomicStatus,
+        sio:ObjectQuality ;
+    skos:definition "A Person's Level of Education"^^xsd:string .
+
+:EarlyChildhoodEducation rdf:type owl:Class ;
+    rdfs:label "Early Childhood Education"^^xsd:string ;
+    rdfs:subClassOf chear:EducationLevel ;
+    skos:definition "Education designed to support early development in preparation for participation in school and society."^^xsd:string ;
+    prov:wasQuotedFrom <https://en.wikipedia.org/wiki/International_Standard_Classification_of_Education#2011_version> .
+
+:PrimaryEducation rdf:type owl:Class ;
+    rdfs:label "Primary Education"^^xsd:string ;
+    rdfs:subClassOf chear:EducationLevel ;
+    skos:definition "Programmes typically designed to provide students with fundamental skills in reading, writing and mathematics and to establish a solid foundation for learning."^^xsd:string ;
+    prov:wasQuotedFrom <https://en.wikipedia.org/wiki/International_Standard_Classification_of_Education#2011_version> .
+
+:LowerSecondaryEducation rdf:type owl:Class ;
+    rdfs:label "Lower Secondary Education"^^xsd:string ;
+    rdfs:subClassOf chear:EducationLevel ;
+    skos:definition "First stage of secondary education building on primary education, typically with a more subject-oriented curriculum."^^xsd:string ;
+    prov:wasQuotedFrom <https://en.wikipedia.org/wiki/International_Standard_Classification_of_Education#2011_version> .
+
+:UpperSecondaryEducation rdf:type owl:Class ;
+    rdfs:label "Upper Secondary Education"^^xsd:string ;
+    rdfs:subClassOf chear:EducationLevel ;
+    skos:definition "Second/final stage of secondary education preparing for tertiary education and/or providing skills relevant to employment. Usually with an increased range of subject options and streams."^^xsd:string ;
+    prov:wasQuotedFrom <https://en.wikipedia.org/wiki/International_Standard_Classification_of_Education#2011_version> .
+
+:PostSecondaryNonTertiaryEducation rdf:type owl:Class ;
+    rdfs:label "Post-Secondary Non-Tertiary Education"^^xsd:string ;
+    rdfs:subClassOf chear:EducationLevel ;
+    skos:definition "Programmes providing learning experiences that build on secondary education and prepare for labour market entry and/or tertiary education. The content is broader than secondary but not as complex as tertiary education."^^xsd:string ;
+    prov:wasQuotedFrom <https://en.wikipedia.org/wiki/International_Standard_Classification_of_Education#2011_version> .
+
+:ShortCycleTertiaryEducation rdf:type owl:Class ;
+    rdfs:label "Short-Cycle Tertiary Education"^^xsd:string ;
+    rdfs:subClassOf chear:EducationLevel ;
+    skos:definition "Short first tertiary programmes that are typically practically-based, occupationally-specific and prepare for labour market entry. These programmes may also provide a pathway to other tertiary programmes."^^xsd:string ;
+    prov:wasQuotedFrom <https://en.wikipedia.org/wiki/International_Standard_Classification_of_Education#2011_version> .
+
+:Bachelors rdf:type owl:Class ;
+    rdfs:label "Bachelor's Degree or Equivalent"^^xsd:string ;
+    rdfs:subClassOf chear:EducationLevel ;
+    skos:definition "Programmes designed to provide intermediate academic and/or professional knowledge, skills and competencies leading to a first tertiary degree or equivalent qualification."^^xsd:string ;
+    prov:wasQuotedFrom <https://en.wikipedia.org/wiki/International_Standard_Classification_of_Education#2011_version> .
+
+:Masters rdf:type owl:Class ;
+    rdfs:label "Master's Degree or Equivalent"^^xsd:string ;
+    rdfs:subClassOf chear:EducationLevel ;
+    skos:definition "Programmes designed to provide advanced academic and/or professional knowledge, skills and competencies leading to a second tertiary degree or equivalent qualification."^^xsd:string ;
+    prov:wasQuotedFrom <https://en.wikipedia.org/wiki/International_Standard_Classification_of_Education#2011_version> .
+
+:Doctoral rdf:type owl:Class ;
+    rdfs:label "Doctoral Degree or Equivalent"^^xsd:string ;
+    rdfs:subClassOf chear:EducationLevel ;
+    skos:definition "Programmes designed primarily to lead to an advanced research qualification, usually concluding with the submission and defense of a substantive dissertation of publishable quality based on original research."^^xsd:string ;
+    prov:wasQuotedFrom <https://en.wikipedia.org/wiki/International_Standard_Classification_of_Education#2011_version> .
+
+sio:InformationContentEntity rdf:type owl:Class ;
+    rdfs:subClassOf sio:Object ;
+    rdfs:label "Information Content Entity"^^xsd:string ;
+    dct:description "An information content entity is an object that requires some background knowledge or procedure to correctly interpret."^^xsd:string .
+
+:Course rdf:type owl:Class ;
+    rdfs:label "Course"^^xsd:string ;
+    rdfs:subClassOf sio:InformationContentEntity .
+    
+:Mathematics rdf:type owl:Class ;
+    rdfs:label "Mathematics"^^xsd:string ;
+    rdfs:subClassOf :Course .
+
+:Algebra a owl:Class ;
+	rdfs:subClassOf :Mathematics ;
+	rdfs:label "Algebra"^^xsd:string .
+
+:AmericanHistory a owl:Class ;
+	rdfs:subClassOf :History ;
+	rdfs:label "American History"^^xsd:string .
+
+:Arithmetic a owl:Class ;
+	rdfs:subClassOf :Mathematics ;
+	rdfs:label "Arthimetic"^^xsd:string .
+
+:Astronomy a owl:Class ;
+	rdfs:subClassOf :Science ;
+	rdfs:label "Astronomy"^^xsd:string .
+
+:Biology a owl:Class ;
+	rdfs:subClassOf :Science ;
+	rdfs:label "Biology"^^xsd:string .
+
+:Calculus a owl:Class ;
+	rdfs:subClassOf :Mathematics ;
+	rdfs:label "Calculus"^^xsd:string .
+
+:Cardinality a owl:Class ;
+	rdfs:subClassOf :Arithmetic ;
+	rdfs:label "Cardinality"^^xsd:string ;
+    :hasStandard
+        eso:CCSS.MATH.CONTENT.K.CC.A.1 ,
+        eso:CCSS.MATH.CONTENT.K.CC.A.2 ,
+        eso:CCSS.MATH.CONTENT.K.CC.A.3 ,
+        eso:CCSS.MATH.CONTENT.K.CC.B.4 ,
+        eso:CCSS.MATH.CONTENT.K.CC.B.5 ,
+        eso:CCSS.MATH.CONTENT.K.CC.C.6 ,
+        eso:CCSS.MATH.CONTENT.K.CC.C.7 .
+
+:Chemistry a owl:Class ;
+	rdfs:subClassOf :Science ;
+	rdfs:label "Chemistry"^^xsd:string .
+
+:ComprehensionAndCollaboration a owl:Class ;
+	rdfs:subClassOf :SpokenLanguage ;
+	rdfs:label "Comprehension and Collaboration"^^xsd:string .
+
+:DifferentialEquations a owl:Class ;
+	rdfs:subClassOf :Mathematics ;
+	rdfs:label "Differential Equations"^^xsd:string .
+
+:EarthScience a owl:Class ;
+	rdfs:subClassOf :Science ;
+	rdfs:label "Earth Science"^^xsd:string .
+
+:EnglishLanguageArts a owl:Class ;
+	rdfs:subClassOf :Language ;
+	rdfs:label "English Language Arts"^^xsd:string .
+
+:Fluency a owl:Class ;
+	rdfs:subClassOf :FoundationalSkills ;
+	rdfs:label "Fluency"^^xsd:string .
+
+:FoundationalSkills a owl:Class ;
+	rdfs:subClassOf :Reading ;
+	rdfs:label "Foundational Skills of Reading"^^xsd:string .
+
+:Geography a owl:Class ;
+	rdfs:subClassOf :History ;
+	rdfs:label "Geography"^^xsd:string .
+
+:Geometry a owl:Class ;
+	rdfs:subClassOf :Mathematics ;
+	rdfs:label "Geometry"^^xsd:string .
+
+:Government a owl:Class ;
+	rdfs:subClassOf :History ;
+	rdfs:label "Government"^^xsd:string .
+
+:Grammar a owl:Class ;
+	rdfs:subClassOf :EnglishLanguageArts ;
+	rdfs:label "Grammar"^^xsd:string .
+
+:Graphs a owl:Class ;
+	rdfs:subClassOf :Geometry ;
+	rdfs:label "Graphs"^^xsd:string ;
+    :hasStandard
+        eso:CCSS.MATH.CONTENT.5.G.A.1 ,
+        eso:CCSS.MATH.CONTENT.5.G.A.2 .
+
+:History a owl:Class ;
+	rdfs:subClassOf :Course ;
+	rdfs:label "History"^^xsd:string .
+
+:HistoryCraftAndStructure a owl:Class ;
+	rdfs:label "History Craft and Structure"^^xsd:string ;
+	rdfs:subClassOf :History .
+
+:HistoryKeyIdeasAndDetails a owl:Class ;
+	rdfs:label "History Craft and Structure"^^xsd:string ;
+	rdfs:subClassOf :History .
+
+:HistoryKnowledgeAndIdeaIntegration a owl:Class ;
+	rdfs:label "History Knowledge And Idea Integration"^^xsd:string ;
+	rdfs:subClassOf :History .
+
+:HistoryReadingRangeAndTextComplexity a owl:Class ;
+	rdfs:label "History Reading Range and Text Complexity"^^xsd:string ;
+	rdfs:subClassOf :History .
+
+:InformationalCraftAndStructure a owl:Class ;
+	rdfs:subClassOf :InformationalText ;
+	rdfs:label "Informational Craft and Structure"^^xsd:string .
+
+:InformationalKeyIdeasAndDetails a owl:Class ;
+	rdfs:subClassOf :InformationalText ;
+	rdfs:label "Informational Key Ideas and Details"^^xsd:string .
+
+:InformationalKnowledgeAndIdeaIntegration a owl:Class ;
+	rdfs:subClassOf :InformationalText ;
+	rdfs:label "Informational Knowledge and Idea Integration"^^xsd:string .
+
+:InformationalReadingRangeAndTextComplexity a owl:Class ;
+	rdfs:subClassOf :InformationalText ;
+	rdfs:label "Informational Reading Range and Text Complexity"^^xsd:string .
+
+:InformationalText a owl:Class ;
+	rdfs:subClassOf :Reading ;
+	rdfs:label "Informational Text"^^xsd:string .
+
+:KnowledgeAndIdeaPresentation a owl:Class ;
+	rdfs:subClassOf :SpokenLanguage ;
+	rdfs:label "Presentation of Knowledge and Ideas"^^xsd:string .
+
+:Language a owl:Class ;
+	rdfs:subClassOf :Course ;
+	rdfs:label "Language"^^xsd:string .
+
+:LanguageKnowledge a owl:Class ;
+	rdfs:subClassOf :Grammar ;
+	rdfs:label "Knowledge of Language"^^xsd:string .
+
+:LineAngleBasedClassification a owl:Class ;
+	rdfs:subClassOf :ShapeIdentificationAndClassification ;
+	rdfs:label "Line Angle Based Classification"^^xsd:string .
+
+:Literature a owl:Class ;
+	rdfs:subClassOf :Reading ;
+	rdfs:label "Literature"^^xsd:string .
+
+:LiteratureCraftAndStructure a owl:Class ;
+	rdfs:subClassOf :Literature ;
+	rdfs:label "Literature Craft and Structure"^^xsd:string .
+
+:LiteratureKeyIdeasAndDetails a owl:Class ;
+	rdfs:subClassOf :Literature ;
+	rdfs:label "Literature Key Ideas and Details"^^xsd:string .
+
+:LiteratureKnowledgeAndIdeaIntegration a owl:Class ;
+	rdfs:subClassOf :Literature ;
+	rdfs:label "Literature Knowledge and Idea Integration"^^xsd:string .
+
+:LiteratureReadingRangeAndTextComplexity a owl:Class ;
+	rdfs:subClassOf :Literature ;
+	rdfs:label "Literature Reading Range and Text Complexity"^^xsd:string .
+
+:Operations a owl:Class ;
+	rdfs:subClassOf :Arithmetic ;
+	rdfs:label "Operations"^^xsd:string ;
+    :hasStandard
+        eso:CCSS.MATH.CONTENT.K.OA.A.1 ,
+        eso:CCSS.MATH.CONTENT.K.OA.A.2 ,
+        eso:CCSS.MATH.CONTENT.K.OA.A.3 ,
+        eso:CCSS.MATH.CONTENT.K.OA.A.4 ,
+        eso:CCSS.MATH.CONTENT.K.OA.A.5 ,
+        eso:CCSS.MATH.CONTENT.1.OA.A.1 ,
+        eso:CCSS.MATH.CONTENT.1.OA.A.2 ,
+        eso:CCSS.MATH.CONTENT.1.OA.B.3 ,
+        eso:CCSS.MATH.CONTENT.1.OA.B.4 ,
+        eso:CCSS.MATH.CONTENT.1.OA.C.5 ,
+        eso:CCSS.MATH.CONTENT.1.OA.C.6 ,
+        eso:CCSS.MATH.CONTENT.1.OA.D.7 ,
+        eso:CCSS.MATH.CONTENT.1.OA.D.8 ,
+        eso:CCSS.MATH.CONTENT.2.OA.A.1 ,
+        eso:CCSS.MATH.CONTENT.2.OA.B.2 ,
+        eso:CCSS.MATH.CONTENT.2.OA.C.3 ,
+        eso:CCSS.MATH.CONTENT.2.OA.C.4 ,
+        eso:CCSS.MATH.CONTENT.3.OA.A.1 ,
+        eso:CCSS.MATH.CONTENT.3.OA.A.2 ,
+        eso:CCSS.MATH.CONTENT.3.OA.A.3 ,
+        eso:CCSS.MATH.CONTENT.3.OA.A.4 ,
+        eso:CCSS.MATH.CONTENT.3.OA.B.5 ,
+        eso:CCSS.MATH.CONTENT.3.OA.B.6 ,
+        eso:CCSS.MATH.CONTENT.3.OA.C.7 ,
+        eso:CCSS.MATH.CONTENT.3.OA.D.8 ,
+        eso:CCSS.MATH.CONTENT.3.OA.D.9 ,
+        eso:CCSS.MATH.CONTENT.4.OA.A.1 ,
+        eso:CCSS.MATH.CONTENT.4.OA.A.2 ,
+        eso:CCSS.MATH.CONTENT.4.OA.A.3 ,
+        eso:CCSS.MATH.CONTENT.4.OA.B.4 ,
+        eso:CCSS.MATH.CONTENT.4.OA.C.5 ,
+        eso:CCSS.MATH.CONTENT.5.OA.A.1 ,
+        eso:CCSS.MATH.CONTENT.5.OA.A.2 ,
+        eso:CCSS.MATH.CONTENT.5.OA.B.3 .
+
+:PhonicsAndWordRecognition a owl:Class ;
+	rdfs:subClassOf :FoundationalSkills ;
+	rdfs:label "Phonics and Word Recognition"^^xsd:string .
+
+:PhonologicalAwareness a owl:Class ;
+	rdfs:subClassOf :FoundationalSkills ;
+	rdfs:label "Phonological Awareness"^^xsd:string .
+
+:Physics a owl:Class ;
+	rdfs:subClassOf :Science ;
+	rdfs:label "Physics"^^xsd:string .
+
+:PrintConcepts a owl:Class ;
+	rdfs:subClassOf :FoundationalSkills ;
+	rdfs:label "Print Concepts"^^xsd:string .
+
+:ProblemSolvingGeometry a owl:Class ;
+	rdfs:subClassOf :Geometry ;
+	rdfs:label "Problem Solving Geometry"^^xsd:string .
+
+:PropertyBasedClassification a owl:Class ;
+	rdfs:subClassOf :ShapeIdentificationAndClassification ;
+	rdfs:label "Property Based Classification"^^xsd:string .
+
+:Reading a owl:Class ;
+	rdfs:subClassOf :EnglishLanguageArts ;
+	rdfs:label "Reading"^^xsd:string .
+
+:Science a owl:Class ;
+	rdfs:subClassOf :Course ;
+	rdfs:label "Science"^^xsd:string .
+
+:ScienceCraftAndStructure a owl:Class ;
+	rdfs:subClassOf :Science ;
+	rdfs:label "Science Craft and Structure"^^xsd:string .
+
+:ScienceKeyIdeasAndDetails a owl:Class ;
+	rdfs:subClassOf :Science ;
+	rdfs:label "Science Key Ideas and Details"^^xsd:string .
+
+:ScienceKnowledgeAndIdeaIntegration a owl:Class ;
+	rdfs:subClassOf :Science ;
+	rdfs:label "Science Knowledge and Idea Integration "^^xsd:string .
+
+:ScienceReadingRangeAndTextComplexity a owl:Class ;
+	rdfs:subClassOf :Science ;
+	rdfs:label "Science Reading Range and Text Complexity"^^xsd:string .
+
+:ShapeAnalysis a owl:Class ;
+	rdfs:subClassOf :Shapes ;
+	rdfs:label "Shape Analysis"^^xsd:string ;
+    :hasStandard
+        eso:CCSS.MATH.CONTENT.K.G.B.4 ,
+        eso:CCSS.MATH.CONTENT.K.G.B.5 , 
+        eso:CCSS.MATH.CONTENT.K.G.B.6 ,
+        eso:CCSS.MATH.CONTENT.6.G.A.1 ,
+        eso:CCSS.MATH.CONTENT.6.G.A.2 ,
+        eso:CCSS.MATH.CONTENT.6.G.A.3 ,
+        eso:CCSS.MATH.CONTENT.6.G.A.4 ,
+        eso:CCSS.MATH.CONTENT.7.G.B.4 ,
+        eso:CCSS.MATH.CONTENT.7.G.B.5 ,
+        eso:CCSS.MATH.CONTENT.7.G.B.6 ,
+        eso:CCSS.MATH.CONTENT.8.G.A.1 ,
+        eso:CCSS.MATH.CONTENT.8.G.A.2 ,
+        eso:CCSS.MATH.CONTENT.8.G.A.4 ,
+        eso:CCSS.MATH.CONTENT.8.G.A.5 ,
+        eso:CCSS.MATH.CONTENT.8.G.B.6 ,
+        eso:CCSS.MATH.CONTENT.8.G.B.7 ,
+        eso:CCSS.MATH.CONTENT.8.G.B.8 ,
+        eso:CCSS.MATH.CONTENT.8.G.C.9 .
+
+:ShapeComparison a owl:Class ;
+	rdfs:subClassOf :Shapes ;
+	rdfs:label "Shape Comparison"^^xsd:string .
+
+:ShapeComposition a owl:Class ;
+	rdfs:subClassOf :Shapes ;
+	rdfs:label "Shape Composition"^^xsd:string ;
+    :hasStandard
+        eso:CCSS.MATH.CONTENT.7.G.A.1 ,
+        eso:CCSS.MATH.CONTENT.7.G.A.2 .
+
+:ShapeDescription a owl:Class ;
+	rdfs:subClassOf :Shapes ;
+	rdfs:label "Shape Description"^^xsd:string ;
+    :hasStandard
+        eso:CCSS.MATH.CONTENT.7.G.A.3 ,
+        eso:CCSS.MATH.CONTENT.8.G.A.3 .
+
+:ShapeIdentificationAndClassification a owl:Class ;
+	rdfs:subClassOf :Shapes ;
+	rdfs:label "Shape Identification and Classification"^^xsd:string ;
+    :hasStandard
+        eso:CCSS.MATH.CONTENT.K.G.A.1 ,
+        eso:CCSS.MATH.CONTENT.K.G.A.2 , 
+        eso:CCSS.MATH.CONTENT.K.G.A.3 ,
+        eso:CCSS.MATH.CONTENT.4.G.A.1 ,
+        eso:CCSS.MATH.CONTENT.4.G.A.2 ,
+        eso:CCSS.MATH.CONTENT.4.G.A.3 ,
+        eso:CCSS.MATH.CONTENT.5.G.B.3 ,
+        eso:CCSS.MATH.CONTENT.5.G.B.4 .
+
+:ShapeReasoning a owl:Class ;
+	rdfs:subClassOf :Shapes ;
+	rdfs:label "Shape Reasoning"^^xsd:string ;
+    :hasStandard
+        eso:CCSS.MATH.CONTENT.1.G.A.1 ,
+        eso:CCSS.MATH.CONTENT.1.G.A.2 , 
+        eso:CCSS.MATH.CONTENT.1.G.A.3 ,
+        eso:CCSS.MATH.CONTENT.2.G.A.1 , 
+        eso:CCSS.MATH.CONTENT.2.G.A.2 , 
+        eso:CCSS.MATH.CONTENT.2.G.A.3 , 
+        eso:CCSS.MATH.CONTENT.3.G.A.1 , 
+        eso:CCSS.MATH.CONTENT.3.G.A.2 . 
+
+:Shapes a owl:Class ;
+	rdfs:subClassOf :Geometry ;
+	rdfs:label "Shapes"^^xsd:string .
+
+:SpokenLanguage a owl:Class ;
+	rdfs:subClassOf :EnglishLanguageArts ;
+	rdfs:label "Spoken Language"^^xsd:string .
+
+:StandardEnglishConventions a owl:Class ;
+	rdfs:subClassOf :Grammar ;
+	rdfs:label "Conventions of Standard English"^^xsd:string .
+
+:Statistics a owl:Class ;
+	rdfs:subClassOf :Mathematics ;
+	rdfs:label "Statistics"^^xsd:string .
+
+:TextTypesAndPurposes a owl:Class ;
+	rdfs:subClassOf :Writing ;
+	rdfs:label "Text Types and Purposes"^^xsd:string .
+
+:Trigonometry a owl:Class ;
+	rdfs:subClassOf :Mathematics ;
+	rdfs:label "Trigonometry"^^xsd:string .
+
+:VocabularyAcquisitionAndUse a owl:Class ;
+	rdfs:subClassOf :Grammar ;
+	rdfs:label "Vocabulary Acquisition and Use"^^xsd:string .
+
+:WorldHistory a owl:Class ;
+	rdfs:subClassOf :History ;
+	rdfs:label "World History"^^xsd:string .
+
+:Writing a owl:Class ;
+	rdfs:subClassOf :EnglishLanguageArts ;
+	rdfs:label "writing"^^xsd:string .
+
+:WritingProductionAndDistribution a owl:Class ;
+	rdfs:subClassOf :Writing ;
+	rdfs:label "Production and Distribution of Writing"^^xsd:string .
+
+:WritingRange a owl:Class ;
+	rdfs:subClassOf :Writing ;
+	rdfs:label "Range of Writing"^^xsd:string .
+
+:WritingResearch a owl:Class ;
+	rdfs:subClassOf :Writing ;
+	rdfs:label "Research to Build and Present Knowledge"^^xsd:string .
+
